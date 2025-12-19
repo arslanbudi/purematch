@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>❤️Pure Match </title>
+    <title>❤️Pure Match</title>
     <style>
         /* Reset CSS dasar */
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -77,38 +77,34 @@
             .sidebar-right { order: 3; } 
         }
 
-        /* --- VIDEO CLICKABLE LINK --- */
+        /* --- PENGATURAN VIDEO PORTRAIT (9:16) --- */
         .video-click-area {
             display: block; 
             position: relative;
+            
+            /* KUNCI: Agar bentuknya memanjang seperti HP (Portrait) */
+            aspect-ratio: 9 / 16; 
+            
+            /* Batasi lebar agar di Desktop tidak raksasa */
             width: 100%;
+            max-width: 350px; /* Ukuran standar layar HP */
+            
+            margin: 0 auto; /* Agar posisi di tengah */
+            
             text-decoration: none;
-            border-radius: 15px;
+            border-radius: 20px; /* Sudut lebih bulat ala HP */
             overflow: hidden;
             box-shadow: 0 0 20px rgba(254, 44, 85, 0.3);
             background-color: #000;
             cursor: pointer; 
         }
 
-        /* Rasio Video Desktop (Landscape) */
-        .video-click-area {
-            aspect-ratio: 16 / 9;
-        }
-
-        /* Rasio Video HP (Portrait/TikTok Style) */
-        @media (max-width: 768px) {
-            .video-click-area {
-                aspect-ratio: 9 / 16; 
-                max-height: 75vh;
-            }
-        }
-
         .video-click-area video {
             width: 100%;
             height: 100%;
+            /* Cover: Video mengisi penuh kotak portrait */
             object-fit: cover; 
             display: block;
-            opacity: 0.9;
             pointer-events: none; /* Klik tembus ke link */
         }
 
@@ -117,19 +113,20 @@
             transform: scale(1.02);
             transition: transform 0.3s ease;
             box-shadow: 0 0 30px rgba(254, 44, 85, 0.6);
+            border: 2px solid #FE2C55;
         }
 
-        /* Tombol Play Overlay (Visual Saja) */
+        /* Tombol Play Overlay */
         .play-button {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            background: rgba(0, 0, 0, 0.6);
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 0, 0, 0.5);
             border-radius: 50%;
-            border: 4px solid #fff;
+            border: 3px solid #fff;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -144,18 +141,18 @@
             display: block;
             width: 0;
             height: 0;
-            border-left: 25px solid #fff;
-            border-top: 15px solid transparent;
-            border-bottom: 15px solid transparent;
-            margin-left: 8px;
+            border-left: 20px solid #fff;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 6px;
         }
 
-        /* --- TOMBOL CHAT NOW (BAWAH) --- */
+        /* --- TOMBOL CHAT NOW --- */
         .btn-claim {
             display: inline-block;
             margin-top: 25px;
-            width: 90%;
-            max-width: 400px;
+            width: 100%;
+            max-width: 350px; /* Samakan lebar dengan video */
             padding: 15px 0;
             background: linear-gradient(45deg, #FE2C55, #FF0050);
             color: white;
@@ -218,15 +215,13 @@
     <!-- KONTEN UTAMA -->
     <div class="container">
         
-        <!-- LINK VIDEO UTAMA -->
+        <!-- LINK VIDEO UTAMA (PORTRAIT / VERTIKAL) -->
         <a href="https://www.effectivegatecpm.com/ms44f37fde?key=2b60154a6640e24a49db9d2d589c4bde" class="video-click-area" target="_blank">
             <!-- 
-               SAYA KEMBALIKAN 'MUTED'
-               Agar video bisa autoplay (Jalan Sendiri).
-               Tanpa muted, video akan hitam/error di browser modern.
+               WAJIB MUTE agar Autoplay jalan di HP.
+               Pastikan video asli Anda berorientasi Vertikal (9:16).
             -->
             <video autoplay muted loop playsinline poster="banner.png">
-                <!-- PASTIKAN FILE INI ADA DI FOLDER YANG SAMA -->
                 <source src="video.mp4" type="video/mp4">
             </video>
             
