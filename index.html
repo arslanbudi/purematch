@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❤️Pure Match 🩷/title>
+    <style>
+        /* Reset CSS dasar */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* --- LOGIKA LAYOUT --- */
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+            position: relative;
+            z-index: 2;
+            order: 2; 
+        }
+
+        .sidebar-ad {
+            width: 300px;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .histats-wrapper {
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            order: 10; 
+        }
+
+        /* Desktop View */
+        @media (min-width: 1201px) {
+            .sidebar-ad {
+                position: fixed; 
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            .sidebar-left { left: 20px; }
+            .sidebar-right { right: 20px; }
+        }
+
+        /* Mobile View */
+        @media (max-width: 1200px) {
+            body {
+                justify-content: flex-start;
+                gap: 20px;
+                padding-top: 10px;
+                padding-bottom: 20px;
+            }
+            .sidebar-ad {
+                position: static;
+                transform: none;
+                margin: 0 auto;
+            }
+            .sidebar-left { order: 1; margin-bottom: 10px; }  
+            .container { order: 2; margin-bottom: 20px; }     
+            .sidebar-right { order: 3; } 
+        }
+
+        /* --- VIDEO CLICKABLE LINK --- */
+        .video-click-area {
+            display: block; 
+            position: relative;
+            width: 100%;
+            text-decoration: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(254, 44, 85, 0.3);
+            background-color: #000;
+            cursor: pointer; 
+        }
+
+        /* Rasio Video Desktop (Landscape) */
+        .video-click-area {
+            aspect-ratio: 16 / 9;
+        }
+
+        /* Rasio Video HP (Portrait/TikTok Style) */
+        @media (max-width: 768px) {
+            .video-click-area {
+                aspect-ratio: 9 / 16; 
+                max-height: 75vh;
+            }
+        }
+
+        .video-click-area video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            display: block;
+            opacity: 0.9;
+            pointer-events: none; /* Klik tembus ke link */
+        }
+
+        /* Efek Hover */
+        .video-click-area:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+            box-shadow: 0 0 30px rgba(254, 44, 85, 0.6);
+        }
+
+        /* Tombol Play Overlay (Visual Saja) */
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            border: 4px solid #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            animation: pulse-play 2s infinite;
+            backdrop-filter: blur(2px);
+            pointer-events: none;
+        }
+
+        .play-button::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-left: 25px solid #fff;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            margin-left: 8px;
+        }
+
+        /* --- TOMBOL CHAT NOW (BAWAH) --- */
+        .btn-claim {
+            display: inline-block;
+            margin-top: 25px;
+            width: 90%;
+            max-width: 400px;
+            padding: 15px 0;
+            background: linear-gradient(45deg, #FE2C55, #FF0050);
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(254, 44, 85, 0.5);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
+        }
+
+        .btn-claim:hover {
+            background: linear-gradient(45deg, #d61e42, #e60045);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(254, 44, 85, 0.7);
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* Animasi */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(254, 44, 85, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(254, 44, 85, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(254, 44, 85, 0); }
+        }
+        @keyframes pulse-play { 
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5); } 
+            70% { box-shadow: 0 0 0 20px rgba(255, 255, 255, 0); } 
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); } 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar-ad sidebar-left">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : '5891fb6676c0734c6d972b61908af244',
+                'format' : 'iframe',
+                'height' : 250,
+                'width' : 300,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/5891fb6676c0734c6d972b61908af244/invoke.js"></script>
+    </div>
+
+    <div class="container">
+        
+        <!-- LINK VIDEO UTAMA -->
+        <a href="https://www.effectivegatecpm.com/ms44f37fde?key=2b60154a6640e24a49db9d2d589c4bde" class="video-click-area" target="_blank">
+            <!-- 
+               PERHATIAN: 
+               Saya menghapus atribut 'muted'. 
+               Di HP, video ini kemungkinan BESAR tidak akan jalan otomatis.
+            -->
+            <video autoplay loop playsinline poster="banner.png">
+                <source src="video.mp4" type="video/mp4">
+            </video>
+            
+            <div class="play-button"></div>
+        </a>
+
+        <!-- TOMBOL CHAT NOW -->
+        <a href="https://www.effectivegatecpm.com/ztf3zuiy?key=30617628fe35bee9bea93026385e6f17" class="btn-claim">
+            Chat Now
+        </a>
+
+        <div class="footer">
+            &copy; 2025❤️Pure Match. All rights reserved.
+        </div>
+    </div>
+
+    <div class="sidebar-ad sidebar-right">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : '5fee7c0df8c16e622489dca8c58825b2',
+                'format' : 'iframe',
+                'height' : 250,
+                'width' : 300,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/5fee7c0df8c16e622489dca8c58825b2/invoke.js"></script>
+    </div>
+    
+    <!-- Histats.com  (div with counter) --><div id="histats_counter"></div>
+<!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,4884516,4,24,200,50,00011111']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4884516&101" alt="free web site hit counter" border="0"></a></noscript>
+<!-- Histats.com  END  -->
+
+</body>
+</html>
